@@ -1,0 +1,63 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  TEST_ENV: staging
+  HEADLESS: 'true'
+  CI: 'true'
+  FORCE_COLOR: '1'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18'
+    displayName: 'Install Node.js'
+
+  - script: npm run ci:azure:install
+    displayName: 'Install dependencies and Playwright browsers'
+
+  - script: npm run lint
+    displayName: 'Lint TypeScript'
+
+  - script: npm run ci:azure:e2e:reports
+    displayName: 'Run Cucumber E2E suite for test-plan pipeline and generate reports'
+    env:
+      TEST_ENV: $(TEST_ENV)
+      HEADLESS: $(HEADLESS)
+      CI: $(CI)
+      FORCE_COLOR: $(FORCE_COLOR)
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Cucumber HTML report'
+    inputs:
+      targetPath: e2e-tests/reports/cucumber-html/cucumber-report.html
+      artifact: cucumber-report-html
+      publishLocation: pipeline
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish framework reports'
+    inputs:
+      targetPath: e2e-tests/reports
+      artifact: framework-reports
+      publishLocation: pipeline
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Allure results'
+    inputs:
+      targetPath: allure-results
+      artifact: allure-results
+      publishLocation: pipeline
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Allure HTML report'
+    inputs:
+      targetPath: allure-report
+      artifact: allure-report
+      publishLocation: pipeline
+    condition: succeededOrFailed()

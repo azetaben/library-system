@@ -1,0 +1,45 @@
+{
+  "validUser": {
+    "username": "",
+    "password": ""
+  },
+  "validBook": {
+    "title": "",
+    "author": "",
+    "genre": "",
+    "ISBN": "",
+    "publicationDate": "",
+    "publicationDay": "",
+    "publicationMonth": "",
+    "publicationYear": "",
+    "price": ""
+  },
+  "validBook1": {
+    "title": "",
+    "author": "",
+    "genre": "",
+    "ISBN": "",
+    "publicationDate": "",
+    "publicationDay": "",
+    "publicationMonth": "",
+    "publicationYear": "",
+    "price": ""
+  },
+  "validBook2": {
+    "title": "",
+    "author": "",
+    "genre": "",
+    "ISBN": "",
+    "publicationDate": "",
+    "publicationDay": "",
+    "publicationMonth": "",
+    "publicationYear": "",
+    "price": ""
+  },
+  "invalidBook": {
+    "title": "",
+    "author": "",
+    "genre": "",
+    "expectedError": "Title is required"
+  }
+}

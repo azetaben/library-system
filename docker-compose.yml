@@ -1,0 +1,12 @@
+services:
+  cucumber-e2e:
+    build: .
+    container_name: library_system_cucumber_e2e
+    working_dir: /app
+    environment:
+      CI: "true"
+      HEADLESS: "true"
+      FORCE_COLOR: "1"
+    volumes:
+      - ./:/app
+    command: npm run test:e2e:report

@@ -1,0 +1,48 @@
+{
+  "credentials": {
+    "validAdmin": {
+      "username": "",
+      "password": ""
+    }
+  },
+  "books": {
+    "validBook": {
+      "title": "Automation Book 2026",
+      "author": "QA Engineer",
+      "genre": "Fiction",
+      "isbn": "9781234567890",
+      "publicationDate": "2024-01-01",
+      "price": "12.99"
+    },
+    "missingTitle": {
+      "title": "",
+      "author": "QA Engineer",
+      "genre": "Fiction",
+      "isbn": "9781234567891",
+      "publicationDate": "2024-01-01",
+      "price": "12.99"
+    },
+    "missingAuthor": {
+      "title": "Missing Author Book",
+      "author": "",
+      "genre": "Fiction",
+      "isbn": "9781234567892",
+      "publicationDate": "2024-01-01",
+      "price": "12.99"
+    }
+  },
+  "validationExpectations": {
+    "missingTitle": [
+      {
+        "field": "title",
+        "messageContains": "fill out this field"
+      }
+    ],
+    "missingAuthor": [
+      {
+        "field": "author",
+        "messageContains": "fill out this field"
+      }
+    ]
+  }
+}

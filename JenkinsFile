@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'nodejs'
+    }
+
+    environment {
+        CI = 'true'
+        FORCE_COLOR = '1'
+        HEADLESS = 'true'
+    }
+
+    stages {
+        stage('Check Node.js Version') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+                sh 'npx playwright install --with-deps'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                sh 'npm run lint'
+            }
+        }
+
+        stage('Run Cucumber E2E Tests') {
+            steps {
+                sh 'npm run test:e2e'
+            }
+        }
+
+        stage('Generate Cucumber Report') {
+            steps {
+                sh 'npm run report:cucumber'
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'e2e-tests/reports/**/*, allure-results/**/*, docs/**/*', allowEmptyArchive: true
+        }
+    }
+}
