@@ -7,10 +7,18 @@ Feature: Books catalog
   Background:
     Common authenticated catalog setup so read-only catalog checks begin from a signed-in state.
     Given I navigate to "/"
+    And I should be in the "landing" page
+    Then I should see the following subheadings:
+      | Introduction         |
+      | Business Requirement |
+      | Task                 |
+      | Important Guidelines |
     When I tap on the "Start Testing" button
+    And I should be in the "login" page
     And I login as a authorised admin user with the following credentials
       | username | password |
       | admin    | admin    |
+    And I should be in the "Book List" page
     Then the "books" page url, title, and heading should be correct
     Then I should be redirected to the books catalog page and I can see "Welcome, Admin!"
     And I can see book catelog management related controls:

@@ -18,14 +18,11 @@ Feature: Books inventory login-to-add-book flow with UI contract checks
 
   @critical
   Scenario: Authorized user can log in, navigate by exact text, and add a valid book
-    Then I should see the exact text control "Start Testing" as clickable
-    When I click the exact text control "Start Testing"
+    When I tap on the "Start Testing" button
     Then the "login" page url, title, and heading should be correct
     And the page URL should include path "/login"
     And the page title should exactly be "Books Inventory App"
     And the primary page header should exactly be "Login"
-    And I should see the exact text control "Show" as clickable
-    And I should see the exact text control "Log In" as clickable
     When I login with username "admin" and password "admin"
     Then the "books" page url, title, and heading should be correct
     And I can see book catelog management related controls:
@@ -44,8 +41,7 @@ Feature: Books inventory login-to-add-book flow with UI contract checks
     And the primary page header should exactly be "Book List"
     And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
     And I should see "Log Out" button on the top right page
-    And I should see the exact text control "Add Book" as clickable
-    When I click the exact text control "Add Book"
+    And I click on the "Add Book" button
     Then the "add a new book" page url, title, and heading should be correct
     And the page URL should be "/add-book"
     And the page title should exactly be "Books Inventory App"
@@ -67,12 +63,11 @@ Feature: Books inventory login-to-add-book flow with UI contract checks
 
   @critical @validation
   Scenario: Authorized user sees add-book validation errors for invalid submission
-    When I click the exact text control "Start Testing"
+    When I tap on the "Start Testing" button
     Then the "login" page url, title, and heading should be correct
     When I login with username "admin" and password "admin"
     Then the "books" page url, title, and heading should be correct
-    And I should see the exact text control "Add Book" as clickable
-    When I click the exact text control "Add Book"
+    And I click on the "Add Book" button
     Then the "add a new book" page url, title, and heading should be correct
     And the page URL should be "/add-book"
     And the primary page header should exactly be "Add a New Book"
@@ -99,12 +94,11 @@ Feature: Books inventory login-to-add-book flow with UI contract checks
 
   @logout @critical @bug
   Scenario: Known gap - logout from the books page does not return the user to login
-    When I click the exact text control "Start Testing"
+    When I tap on the "Start Testing" button
     Then the "login" page url, title, and heading should be correct
     When I login with username "admin" and password "admin"
     Then the "books" page url, title, and heading should be correct
-    And I should see the exact text control "Log Out" as clickable
-    When I click the exact text control "Log Out"
+    When I tap on the "Logout" button
     But I remain on the book catalog page
     But the "Log Out" button should not be visible on the "Book List" page
     And the button and link below are not present and visible

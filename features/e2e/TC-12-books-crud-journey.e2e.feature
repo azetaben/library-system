@@ -7,6 +7,7 @@ Feature: Books inventory admin CRUD journey
   @regression @critical @login @add-book @edit-book @delete-book @logout @e2e
   Scenario: Authorized admin user can add edit delete and logout successfully
     Given I navigate to "/"
+    And I should be in the "landing" page
     And I should see "Books Inventory App" as the page title
     And I should see the following subheadings:
       | Introduction         |

@@ -1,4 +1,9 @@
 export default function () {
+    const regressionParallel = Math.max(
+        1,
+        Number.parseInt(process.env.CUCUMBER_REGRESSION_PARALLEL ?? '2', 10) || 2,
+    );
+
     const sharedConfig = {
         import: [
             'e2e-tests/config/**/*.ts',
@@ -45,6 +50,7 @@ export default function () {
         regression: {
             ...sharedConfig,
             tags: '@regression and not @bug',
+            parallel: regressionParallel,
         },
         debug: {
             ...sharedConfig,

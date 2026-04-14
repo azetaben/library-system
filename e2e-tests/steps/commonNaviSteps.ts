@@ -1,10 +1,12 @@
-import {Given, When} from '@cucumber/cucumber';
+import {Given, Then, When} from '@cucumber/cucumber';
 import {CustomWorld} from '../support/world.ts';
 import {logger} from '../utils/Logger.ts';
 import {envConfig} from '../config/env.config.ts';
 import {testData} from '../utils/TestData.ts';
 import {appData, appPatterns} from '../utils/AppData.ts';
-import {isLoginTarget} from '../utils/stepSupport.ts';
+import {isLoginTarget, isOnRoute} from '../utils/stepSupport.ts';
+import {assertAddBookButtonClickable} from './addBookAssertions.ts';
+import {assertEditBookButtonClickable} from './editBookAssertions.ts';
 
 async function navigateLandingWhenResponsive(
     world: CustomWorld,
@@ -231,12 +233,6 @@ When('I login in login page', async function (this: CustomWorld) {
     await loginWithValidAdmin(this);
 });
 
-When(
-    'I login as an authenticated admin user with username {string} and password {string}',
-    async function (this: CustomWorld, username: string, password: string) {
-        await this.pm.getLoginPage().login(username, password);
-    },
-);
 
 When(
     'I sign in with valid admin credentials if a login page is shown',
@@ -306,3 +302,30 @@ When(/^I click on the logout button$/, async function (this: CustomWorld) {
         throw error;
     }
 });
+
+Then(
+    'I should see the {string} button as enabled and clickable',
+    async function (
+        this: CustomWorld & { activeBookFormName?: string },
+        buttonName: string,
+    ) {
+        logger.info(`Verifying button ${buttonName} is enabled and clickable`);
+        const onEditBookPage =
+            this.activeBookFormName === 'edit book' ||
+            isOnRoute(this.page.url(), envConfig.routes.editBook) ||
+            (await this.pm
+                .getEditBookPage()
+                .header()
+                .isVisible()
+                .catch(() => false));
+
+        if (onEditBookPage) {
+            this.activeBookFormName = 'edit book';
+            await assertEditBookButtonClickable(this.pm.getEditBookPage(), buttonName);
+            return;
+        }
+
+        this.activeBookFormName = 'add book';
+        await assertAddBookButtonClickable(this.pm.getAddBookPage(), buttonName);
+    },
+);

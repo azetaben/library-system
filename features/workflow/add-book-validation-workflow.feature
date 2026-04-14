@@ -7,6 +7,7 @@ Feature: Add book validation workflow
   Background:
     Common authenticated add-book setup for validation workflow scenarios.
     Given I navigate to "login" page
+
     When I login with username "admin" and password "admin"
     And I click on the "Add Book" button
     Then I should be in the "Add a New Book" page

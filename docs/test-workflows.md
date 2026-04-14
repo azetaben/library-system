@@ -1,19 +1,33 @@
 # Test Workflows
 
-This document captures practical BDD workflow patterns for the Books Inventory automation framework.
+This document captures the current executable workflow patterns for the Books Inventory automation framework.
+
+The examples below mirror the feature files under `features/workflow/` and are intended to stay small, readable, and reusable.
+
+## Workflow Inventory
+
+- `features/workflow/login-workflow.feature`
+- `features/workflow/add-book-workflow.feature`
+- `features/workflow/add-book-validation-workflow.feature`
+- `features/workflow/edit-book-workflow.feature`
+- `features/workflow/delete-workflow.feature`
+- `features/workflow/logout-workflow.feature`
+- `features/workflow/security-workflow.feature`
+- `features/workflow/responsive-workflow.feature`
 
 ## Login Workflow
 
-Use this workflow when a scenario needs an authenticated user before accessing protected pages.
+Use this when a scenario needs an authenticated user before accessing protected pages.
 
 ```gherkin
+@workflow @login
 Feature: Login workflow
   As an application user
   I want to sign in successfully
   So that I can access protected pages
 
   Background:
-    Common navigation setup for login-based scenarios.
+    Common navigation setup for login workflow scenarios.
     Given I navigate to "login" page
 
   Scenario: User logs in successfully
@@ -24,16 +38,17 @@ Feature: Login workflow
 
 ## Add Book Workflow
 
-Use this workflow when the scenario verifies successful book creation.
+Use this when the scenario verifies successful book creation.
 
 ```gherkin
+@workflow @add-book
 Feature: Add book workflow
   As an authorized user
   I want to add a new book
   So that the catalog stays up to date
 
   Background:
-    Common authenticated setup for add-book scenarios.
+    Common authenticated setup for add-book workflow scenarios.
     Given I navigate to "login" page
     When I login with username "admin" and password "admin"
     Then I should be in the "books list" page
@@ -47,16 +62,17 @@ Feature: Add book workflow
 
 ## Edit Book Workflow
 
-Use this workflow when the scenario updates an existing book.
+Use this when the scenario updates an existing book.
 
 ```gherkin
+@workflow @edit-book
 Feature: Edit book workflow
   As an authorized user
   I want to edit an existing book
   So that catalog details remain accurate
 
   Background:
-    Common authenticated setup for edit-book scenarios.
+    Common authenticated setup for edit-book workflow scenarios.
     Given I navigate to "login" page
     When I login with username "admin" and password "admin"
     Then I should be in the "books list" page
@@ -68,16 +84,17 @@ Feature: Edit book workflow
 
 ## Delete Book Workflow
 
-Use this workflow when the scenario removes a book from the catalog.
+Use this when the scenario removes a book from the catalog.
 
 ```gherkin
+@workflow @delete-book
 Feature: Delete book workflow
   As an authorized user
   I want to delete a book
   So that unwanted catalog entries can be removed
 
   Background:
-    Common authenticated setup for delete-book scenarios.
+    Common authenticated setup for delete-book workflow scenarios.
     Given I navigate to "login" page
     When I login with username "admin" and password "admin"
     Then I should be in the "books list" page
@@ -90,16 +107,17 @@ Feature: Delete book workflow
 
 ## Add Book Validation Workflow
 
-Use this workflow when the scenario verifies required-field behavior on the add-book page.
+Use this when the scenario verifies required-field behavior on the add-book page.
 
 ```gherkin
+@workflow @add-book @validation
 Feature: Add book validation workflow
   As an authorized user
   I want invalid book submissions to be rejected
   So that incomplete catalog entries are not created
 
   Background:
-    Common authenticated add-book setup for validation scenarios.
+    Common authenticated add-book setup for validation workflow scenarios.
     Given I navigate to "login" page
     When I login with username "admin" and password "admin"
     And I click on the "Add Book" button
@@ -120,16 +138,17 @@ Feature: Add book validation workflow
 
 ## Logout Workflow
 
-Use this workflow when the scenario validates logout behavior or known logout gaps.
+Use this when the scenario validates logout behavior or known logout gaps.
 
 ```gherkin
+@workflow @logout
 Feature: Logout workflow
   As an authenticated user
   I want to end my session
   So that access to protected pages is stopped or clearly assessed
 
   Background:
-    Common authenticated setup for logout scenarios.
+    Common authenticated setup for logout workflow scenarios.
     Given I navigate to "login" page
     When I login with username "admin" and password "admin"
     Then I should be in the "books list" page
@@ -141,9 +160,10 @@ Feature: Logout workflow
 
 ## Security Workflow
 
-Use this workflow when the scenario checks unauthorized direct navigation or attack-style input.
+Use this when the scenario checks unauthorized direct navigation or attack-style input.
 
 ```gherkin
+@workflow @security
 Feature: Security workflow
   As a security-conscious application owner
   I want unauthorized access attempts to be exercised
@@ -156,9 +176,10 @@ Feature: Security workflow
 
 ## Responsive Workflow
 
-Use this workflow when the scenario validates responsive layout behavior across screen sizes.
+Use this when the scenario validates responsive layout behavior across screen sizes.
 
 ```gherkin
+@workflow @responsive
 Feature: Responsive workflow
   As a user on different devices
   I want the landing page to adapt to my viewport
@@ -179,9 +200,9 @@ Feature: Responsive workflow
 
 ## Authoring Guidance
 
-- Keep feature files business-readable by default.
-- Use stricter URL/title/header checks in dedicated UI-contract scenarios.
-- Reuse shared navigation steps instead of creating new page-specific variants unless the wording is meaningfully different.
-- Prefer canonical page assertions such as `I should be in the "..." page`.
-- Tag known application defects with `@bug` so they do not block the default regression path.
-- Keep action steps in `*Steps.ts` and verification steps in `*Assertions.ts`.
+- Keep workflow features executable and close to the shared step vocabulary.
+- Use `@workflow` on executable documentation scenarios.
+- Reuse navigation and assertion steps rather than creating slight wording variants.
+- Keep action steps in `*Steps.ts` and verification in `*Assertions.ts`.
+- Tag known product defects with `@bug` instead of forcing broken expectations into default coverage.
+- Run `npm.cmd run test:dry-run features/workflow/**/*.feature` or the full dry-run profile after workflow edits.

@@ -7,6 +7,7 @@ Feature: Accessibility checks
   Background:
     Common starting point for validating accessibility expectations on the application entry page.
     Given I navigate to "/"
+    And I should be in the "landing" page
 
   @regression @a11y @landing
   Scenario: Landing page accessibility checks
@@ -19,4 +20,5 @@ Feature: Accessibility checks
   @regression @a11y @login
   Scenario: Login page accessibility checks
     When I tap on the "Start Testing" button
+    And I should be in the "login" page
     Then the page should be accessible

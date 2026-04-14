@@ -8,7 +8,7 @@ Feature: Edit book page strict validation and logout retention checks
     Common authenticated edit-page setup so each scenario starts from the edit form for an existing book.
     Given I navigate to "/"
     Then the "landing" page url, title, and heading should be correct
-    When I click the exact text control "Start Testing"
+    When I tap on the "Start Testing" button
     Then the "login" page url, title, and heading should be correct
     And the page URL should include path "/login"
     And the page title should exactly be "Books Inventory App"
@@ -60,7 +60,7 @@ Feature: Edit book page strict validation and logout retention checks
   Scenario: Clicking logout from the edit page leaves the user on edit instead of returning to login
     And I should see "Log Out" button on the top right page
     And I should be authenticated as "Welcome, Admin!"
-    When I click the exact text control "Log Out"
+    When I tap on the "Logout" button
     Then the "Edit Book" page url, title, and heading should be correct
     And the page URL should include path "/edit-book"
     But I can see page URL include path "/edit-book" instead of "/login"

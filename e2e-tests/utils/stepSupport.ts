@@ -1,5 +1,6 @@
 import {appData} from './AppData.ts';
 import {envConfig} from '../config/env.config.ts';
+import {logger} from './Logger.ts';
 
 export type NamedPageKey =
     | 'landing'
@@ -29,48 +30,60 @@ function normalizeValue(value: string): string {
 }
 
 export function escapeRegex(value: string): string {
+    logger.debug(`Escaping regex value "${value}"`);
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 export function normalizeNamedPage(pageName: string): NamedPageKey | undefined {
     const normalizedPageName = normalizeValue(pageName);
+    logger.debug(`Normalizing named page "${pageName}"`);
 
     for (const [pageKey, aliases] of Object.entries(stepAliases.pages)) {
         if ((aliases as readonly string[]).includes(normalizedPageName)) {
+            logger.info(`Resolved named page "${pageName}" to "${pageKey}"`);
             return pageKey as NamedPageKey;
         }
     }
 
+    logger.warn(`No named page alias matched "${pageName}"`);
     return undefined;
 }
 
 export function normalizeBookFormName(formName: string): BookFormKey | undefined {
     const normalizedFormName = normalizeValue(formName);
+    logger.debug(`Normalizing book form name "${formName}"`);
 
     for (const [formKey, aliases] of Object.entries(stepAliases.forms)) {
         if ((aliases as readonly string[]).includes(normalizedFormName)) {
+            logger.info(`Resolved form name "${formName}" to "${formKey}"`);
             return formKey as BookFormKey;
         }
     }
 
+    logger.warn(`No book form alias matched "${formName}"`);
     return undefined;
 }
 
 export function routePattern(path: string): RegExp {
+    logger.debug(`Creating route pattern for path "${path}"`);
     return new RegExp(`${escapeRegex(path)}(?:/|$)`, 'i');
 }
 
 export function isLoginTarget(target: string): boolean {
     const normalizedTarget = normalizeValue(target);
-    return (
+    const result = (
         normalizedTarget === 'login' ||
         normalizedTarget === envConfig.routes.login ||
         normalizedTarget.endsWith(envConfig.routes.login)
     );
+    logger.debug(`Login target check for "${target}" resolved to ${result}`);
+    return result;
 }
 
 export function isOnRoute(url: string, route: string): boolean {
-    return routePattern(route).test(url);
+    const result = routePattern(route).test(url);
+    logger.debug(`Route match check url="${url}" route="${route}" => ${result}`);
+    return result;
 }
 
 export const stepUiText = {

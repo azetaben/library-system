@@ -351,24 +351,21 @@ Then(
 
 Then('I should not see edit a book form', async function (this: CustomWorld) {
     await expect(this.pm.getEditBookPage().header()).toHaveCount(0);
+    logger.info('Verified that edit book form is not visible');
 });
 
 Then('I should not see add a book form', async function (this: CustomWorld) {
     await expect(this.pm.getAddBookPage().header()).toHaveCount(0);
+    logger.info('Verified that add book form is not visible');
 });
 
 Then(
     'I can see {string} form in the page',
     async function (this: CustomWorld, formName: string) {
         const escapedFormName = formName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        await expect(
-            this.page
-                .locator('h1, h2, h3, [role="heading"], form, section, div')
-                .filter({hasText: new RegExp(escapedFormName, 'i')})
-                .first(),
-        ).toBeVisible();
-    },
-);
+        await expect(this.page.locator('h1, h2, h3, [role="heading"], form, section, div')
+                .filter({hasText: new RegExp(escapedFormName, 'i')}).first()).toBeVisible();
+    });
 
 Then(
     'I can see the login {string}',

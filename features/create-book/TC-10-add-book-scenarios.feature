@@ -7,7 +7,9 @@ Feature: Add Book Scenarios
   Background:
     Common authenticated add-book setup so scenario variations start from the add-book page.
     Given I navigate to "/"
+    Then I should be in the "landing" page
     When I tap on the "Start Testing" button
+    Then I should be in the "login" page
     When I login with username "admin" and password "admin"
     And I click on the "Add Book" button
     And I am in the "Add a New Book" page

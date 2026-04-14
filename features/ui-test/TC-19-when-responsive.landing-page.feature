@@ -23,8 +23,7 @@ Feature: Landing page responsive design
   Scenario: Login after warming the Render app
     Given I navigate to the landing page when the API is responsive
     When I tap on the "Start Testing" button
-    And I enter username "admin" and password "admin"
-    And I click "Log In" button
+    When I login with username "admin" and password "admin"
     Then I should be authenticated as "Welcome, Admin!"
 
   @regression @responsive @login @warming @Critical
@@ -43,7 +42,7 @@ Feature: Landing page responsive design
   Scenario: navigate landing page after warming the app
     Given I navigate to "/"
     When I tap on the "Start Testing" button
-    And I login as an authenticated admin user with username "admin" and password "admin"
+    When I login with username "admin" and password "admin"
     Then I should be authenticated as "Welcome, Admin!"
 
   @regression @responsive @login @warming @Critical

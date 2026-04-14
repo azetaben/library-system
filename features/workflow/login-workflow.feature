@@ -7,6 +7,7 @@ Feature: Login workflow
   Background:
     Common navigation setup for login workflow scenarios.
     Given I navigate to "login" page
+    And I should be in the "login" page
 
   Scenario: User logs in successfully
     When I login with username "admin" and password "admin"

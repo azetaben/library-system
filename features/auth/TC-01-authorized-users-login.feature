@@ -21,4 +21,3 @@ Feature: Admin system authorised user login authentication
     Then I should be authenticated as "Welcome, Admin!"
     And the "books list" page url, title, and heading should be correct
     And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
-    Then I should be authenticated as "Welcome, Admin!"

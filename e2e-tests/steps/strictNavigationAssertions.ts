@@ -3,6 +3,7 @@ import {expect} from '@playwright/test';
 import {CustomWorld} from '../support/world.ts';
 import {envConfig} from '../config/env.config.ts';
 import {AssertionHelpers} from '../helperUtilities/assertionHelpers.ts';
+import {logger} from '../utils/Logger.ts';
 
 function escapeRegex(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -20,6 +21,7 @@ export async function assertExactControlClickable(
     world: CustomWorld,
     label: string,
 ): Promise<void> {
+    logger.info(`Verifying exact text control "${label}" is clickable`);
     const locator = exactControlLocator(world, label);
     await expect(locator).toBeVisible();
     await expect(locator).toBeEnabled();
@@ -27,15 +29,9 @@ export async function assertExactControlClickable(
 }
 
 Then(
-    'I should see the exact text control {string} as clickable',
-    async function (this: CustomWorld, label: string) {
-        await assertExactControlClickable(this, label);
-    },
-);
-
-Then(
     'the page URL should be {string}',
     async function (this: CustomWorld, expectedPathOrUrl: string) {
+        logger.info(`Verifying exact page URL "${expectedPathOrUrl}"`);
         const expectedUrl = /^https?:\/\//i.test(expectedPathOrUrl)
             ? expectedPathOrUrl
             : `${envConfig.baseUrl}${expectedPathOrUrl === '/' ? '' : expectedPathOrUrl}`;
@@ -46,6 +42,7 @@ Then(
 Then(
     'the page URL should include path {string}',
     async function (this: CustomWorld, expectedPath: string) {
+        logger.info(`Verifying page URL includes path "${expectedPath}"`);
         await expect(this.page).toHaveURL(
             new RegExp(`${escapeRegex(expectedPath)}(?:/|$)`, 'i'),
         );
@@ -59,6 +56,9 @@ Then(
         actualPath: string,
         unexpectedPath: string,
     ) {
+        logger.info(
+            `Verifying page URL includes "${actualPath}" instead of "${unexpectedPath}"`,
+        );
         await expect(this.page).toHaveURL(
             new RegExp(`${escapeRegex(actualPath)}(?:/|$)`, 'i'),
         );
@@ -71,6 +71,7 @@ Then(
 Then(
     'the primary page header should exactly be {string}',
     async function (this: CustomWorld, expectedHeader: string) {
+        logger.info(`Verifying exact primary page header "${expectedHeader}"`);
         const exactHeader = new RegExp(`^\\s*${escapeRegex(expectedHeader)}\\s*$`, 'i');
         await expect(
             this.page
@@ -84,6 +85,7 @@ Then(
 Then(
     'the page title should exactly be {string}',
     async function (this: CustomWorld, expectedTitle: string) {
+        logger.info(`Verifying exact page title "${expectedTitle}"`);
         await AssertionHelpers.expectTitle(this.page, expectedTitle);
     },
 );
@@ -91,6 +93,7 @@ Then(
 Then(
     'the button and link below are not present and visible',
     async function (this: CustomWorld, dataTable: DataTable) {
+        logger.info('Verifying specified buttons and links are absent');
         for (const row of dataTable.hashes()) {
             const label = (row.label ?? row.Label ?? '').trim();
             if (!label) {

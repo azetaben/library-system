@@ -8,7 +8,7 @@ import {VerificationHelpers} from '../helperUtilities/verificationHelpers.ts';
 import {appData} from '../utils/AppData.ts';
 import {logger} from '../utils/Logger.ts';
 import {REQUIRED_ADD_BOOK_ERRORS} from '../utils/addBook.constants.ts';
-import {formatCatalogDate, formatCatalogPrice} from '../utils/catalogFormatters.ts';
+import {formatCatalogDate, formatCatalogPrice} from "../utils/catalogFormatters.ts";
 
 type RequiredAddBookError = {
     field: (typeof REQUIRED_ADD_BOOK_ERRORS)[number]['field'];

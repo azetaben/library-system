@@ -3,17 +3,16 @@ import {CustomWorld} from '../support/world.ts';
 import {testData} from '../utils/TestData.ts';
 import {logger} from '../utils/Logger.ts';
 import type {EditBookFormData} from '../pages/EditBookPage.ts';
-import {EditBookPage} from '../pages/EditBookPage.ts';
 import {
     assertEditBookButtonClickable,
+    assertEditBookFieldsPrefilledAndEditable,
     assertEditBookFieldsVisibleAndFillable,
     assertEditBookNativeValidationMessage,
     assertEditBookPageLoaded,
 } from './editBookAssertions.ts';
 import {appData} from '../utils/AppData.ts';
 
-const editBookPage = (world: CustomWorld): EditBookPage =>
-    new EditBookPage(world.page);
+const editBookPage = (world: CustomWorld) => world.pm.getEditBookPage();
 
 type UpdatedBookDetails = {
     title: string;
@@ -113,6 +112,13 @@ Then(
     'I verify the {string} button is visible and clickable',
     async function (this: CustomWorld, buttonName: string) {
         await assertEditBookButtonClickable(editBookPage(this), buttonName);
+    },
+);
+
+Then(
+    'I should see 6 pre-filled editable edit book fields',
+    async function (this: CustomWorld) {
+        await assertEditBookFieldsPrefilledAndEditable(editBookPage(this));
     },
 );
 

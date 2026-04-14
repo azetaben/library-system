@@ -69,55 +69,47 @@ Feature: Authentication and Authorization
     And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
     And I click on the "Add Book" button
     And I should be in the "Add a New Book" page
-    #And I am in the "Add a New Book" page
     And the "Add Book" page url, title, and heading should be correct
     And I click on the logout button
     And the "Add Book" page url, title, and heading should be correct
 
   @regression @login @negative
   Scenario: Successful login with valid credentials containing leading and trailing spaces
-    When I enter username " admin " and password " admin "
-    And I click on the Log In button
+    When I login with username " admin " and password " admin "
     Then I should see an authentication error message "Invalid username or password"
 
   @regression @login @negative
   Scenario: Failed login with incorrect password
-    When I enter username "admin" and password "wrongpassword"
-    And I click on the Log In button
+    When I login with username "admin" and password "wrongpassword"
     Then I should see an authentication error message "Invalid username or password"
     And I should be on the login page
 
   @regression @login @negative
   Scenario: Failed login with unregistered username
-    When I enter username "unknownuser" and password "admin"
-    And I click on the Log In button
+    When I login with username "unknownuser" and password "admin"
     Then I should see an authentication error message "Invalid username or password"
-    And I should be on the login page
+    And I should be in the "login" page
 
   @regression @login @negative @validation
   Scenario: Failed login with completely empty credentials
-    When I enter username "" and password ""
-    And I click "Log In" button
+    When I login with username "" and password ""
     Then I should see an authentication error message "Please enter your username"
 
   @regression @login @negative @validation
   Scenario: Failed login with empty username but valid password
-    When I enter username "" and password "admin"
-    And I click "Log In" button
+    When I login with username "" and password "admin"
     Then I should see an authentication error message "Please enter your username"
 
   @regression @login @negative @validation
   Scenario: Failed login with valid username but empty password
-    When I enter username "admin" and password ""
-    And I click "Log In" button
+    When I login with username "admin" and password ""
     Then I should see a validation error message "Please enter your password"
 
   @regression @security @negative
   Scenario: Failed login with SQL injection attempt in username
-    When I enter username "' OR '1'='1" and password "admin"
-    And I click "Log In" button
+    When I login with username "' OR '1'='1" and password "admin"
     Then I should see an authentication error message "Invalid username or password"
-    And I should be on the login page
+    And I should be in the "login" page
 
   @critical @regression @authorization @security
   Scenario: Unauthorized direct URL access to the books catalog (Auth Guard check)
@@ -142,7 +134,6 @@ Feature: Authentication and Authorization
   @regression @login @negative
   Scenario: Login fails with invalid credentials
     When I login with username "admin001" and password "admin001"
-    Then I should see an error message
     Then I should see "<errors message>"
       | errors message                          |
       | There is a problem with your submission |

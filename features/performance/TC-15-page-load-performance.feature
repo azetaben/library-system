@@ -7,7 +7,6 @@ Feature: Page load performance metrics
 
   @regression @performance @landing
   Scenario: Verify landing page performance
-
     Then the page load time should be less than 5000 milliseconds
     And the First Contentful Paint should be less than 3000 milliseconds
 

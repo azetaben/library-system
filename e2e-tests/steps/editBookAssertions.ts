@@ -41,6 +41,35 @@ export async function assertEditBookFieldsVisibleAndFillable(
     }
 }
 
+export async function assertEditBookFieldsPrefilledAndEditable(
+    editBookPage: EditBookPage,
+): Promise<void> {
+    logger.info(
+        'Verifying 6 edit-book fields are visible, pre-filled, and editable',
+    );
+    const fields = [
+        ['Title', editBookPage.titleInput],
+        ['Author', editBookPage.authorInput],
+        ['Genre', editBookPage.genreInput],
+        ['ISBN', editBookPage.isbnInput],
+        ['Publication Date', editBookPage.publicationDateInput],
+        ['Price', editBookPage.priceInput],
+    ] as const;
+
+    expect(fields).toHaveLength(6);
+
+    for (const [fieldName, field] of fields) {
+        await expect(field).toBeVisible();
+        await expect(field).toBeEditable();
+
+        const currentValue = (await field.inputValue()).trim();
+        expect(
+            currentValue,
+            `Expected "${fieldName}" to be pre-filled with the existing book details.`,
+        ).not.toBe('');
+    }
+}
+
 export async function assertEditBookButtonClickable(
     editBookPage: EditBookPage,
     buttonName: string,

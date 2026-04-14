@@ -7,6 +7,7 @@ Feature: Delete book workflow
   Background:
     Common authenticated setup for delete-book workflow scenarios.
     Given I navigate to "login" page
+    And I should be in the "login" page
     When I login with username "admin" and password "admin"
     Then I should be in the "books list" page
 

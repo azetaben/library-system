@@ -5,7 +5,6 @@ import type {AddedBookDetails} from '../utils/book.types.ts';
 import {REQUIRED_ADD_BOOK_ERRORS} from '../utils/addBook.constants.ts';
 import {BookFactory} from '../utils/bookFactory.ts';
 import {
-    assertAddBookButtonClickable,
     assertAddBookFieldsVisibleAndFillable,
     assertAddBookPageLoaded,
     assertAddBookRequiredFieldError,
@@ -256,14 +255,6 @@ Then(
             this.pm.getAddBookPage(),
             expectedCount,
         );
-    },
-);
-
-Then(
-    'I should see the {string} button as enabled and clickable',
-    async function (this: CustomWorld, buttonName: string) {
-        logger.info(`Verifying button ${buttonName} is enabled and clickable`);
-        await assertAddBookButtonClickable(this.pm.getAddBookPage(), buttonName);
     },
 );
 

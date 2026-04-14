@@ -108,7 +108,6 @@ Feature: Add a New Book
       | Title   | Author   | Genre   | ISBN   | Publication Date  | Price   |
       | <Title> | <Author> | <Genre> | <ISBN> | <PublicationDate> | <Price> |
     Then I should see a validation error or submission rejection for "<Field>"
-
     Examples:
       | Field            | Title                      | Author      | Genre        | ISBN          | PublicationDate | Price     |
       | Title            | This Title Is Way Too Long | Ben Carlson | Fantasy      | 9781234567811 | 2000-09-01      | 16.99     |
