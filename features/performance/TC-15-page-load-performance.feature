@@ -71,6 +71,6 @@ Feature: Page load performance metrics
         | Next                 |
         | Page 1 of 1          |
         | Total Book Titles: 3 |
-      When I tap on the "Edit" button for a book titled "Book Title 1"
+      And I click on the "Edit" button for the book "The Very Busy Spider"
       Then the page load time should be less than 5000 milliseconds
       And the First Contentful Paint should be less than 4000 milliseconds

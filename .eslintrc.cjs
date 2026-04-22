@@ -12,4 +12,14 @@ module.exports = {
         project: true,
         tsconfigRootDir: __dirname,
     },
+    rules: {
+        'no-restricted-syntax': [
+            'error',
+            {
+                selector: 'TSEnumDeclaration',
+                message:
+                    'TypeScript enum is not supported in strip-only runtime mode. Use const object + union type instead.',
+            },
+        ],
+    },
 };

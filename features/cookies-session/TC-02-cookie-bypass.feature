@@ -11,7 +11,7 @@ Feature: restore an authenticated session with cookie bypass
     When I tap on the "Start Testing" button
     And the "login" page url, title, and heading should be correct
     And I login with username "admin" and password "admin"
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I can see book catelog management related controls:
       | control              |
       | Welcome, Admin!      |
@@ -33,7 +33,7 @@ Feature: restore an authenticated session with cookie bypass
     And the "login" page url, title, and heading should be correct
     When I login with username "admin" and password "admin"
     And I should see "Books Inventory App" as the page title
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I can see book catelog management related controls:
       | control              |
       | Log Out              |
@@ -50,6 +50,6 @@ Feature: restore an authenticated session with cookie bypass
   @regression @session@catalog
   Scenario: restore an authenticated session to the books catalog page
     Given I restore the session to the books catalog page
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I should see "Book List" heading on the page
     And I should see the "Book List" page with the correct heading

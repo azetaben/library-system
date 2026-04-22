@@ -11,6 +11,8 @@ Feature: Add Book Scenarios
     When I tap on the "Start Testing" button
     Then I should be in the "login" page
     When I login with username "admin" and password "admin"
+    Then the "books" page url, title, and heading should be correct
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I click on the "Add Book" button
     And I am in the "Add a New Book" page
     And I should see the "Add a New Book" form with the correct labels

@@ -1,6 +1,6 @@
 import type {BrowserContextOptions, LaunchOptions} from '@playwright/test';
 import {envConfig} from './env.config.ts';
-import {logger} from '../utils/Logger.ts';
+import {logger} from '../utils/runtime/index.ts';
 
 export const browserOptions: LaunchOptions = {
     headless: envConfig.headless,

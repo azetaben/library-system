@@ -22,10 +22,10 @@ Feature: Admin system authorised user add  a book functionality
     When I login with username "admin" and password "admin"
     And the "books" page url, title, and heading should be correct
     And I should see the "Book List" page with the correct heading
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And the page Heading should be "Book List"
     Then I should be authenticated as "Welcome, Admin!"
-    And I can see "Total Book Titles:" 3 in the book catalog page
+    And I can see "Total Book Titles:" 3 in the books list page
 
   @regression @add-book @navigation
   Scenario: verify add book page details

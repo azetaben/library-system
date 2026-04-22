@@ -9,6 +9,7 @@ Feature: UI Pages
     Given I navigate to "/"
     And I should be in the "landing" page
     And I should see "Books Inventory App" as the page title
+    And I can see "Start Testing" button color "purple" and styling is correct
 
   @regression @ui @landing
   Scenario: Verify all UI elements - Landing Page
@@ -18,7 +19,6 @@ Feature: UI Pages
       | Task                 |
       | Important Guidelines |
     And I should see the "Start Testing" button with the correct title
-    And I can see "Start Testing" button color "purple" and styling is correct
 
 
   @regression @ui @login
@@ -44,6 +44,7 @@ Feature: UI Pages
     Then the password should be hidden
     And I can see "Log In" button color "purple" and styling is correct
 
+
   @regression @ui @books-list
     Scenario: Verify all UI elements on Books Catalog Page
     When I tap on the "Start Testing" button
@@ -53,7 +54,7 @@ Feature: UI Pages
     And I should see "Books Inventory App" as the page title
     And I should be in the "Book List" page
     Then the "Book List" page url, title, and heading should be correct
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I can see book catelog management related controls:
       | control     |
       | Log Out     |
@@ -65,17 +66,17 @@ Feature: UI Pages
       | Next        |
       | Page 1 of 1 |
     And I verify the total book titles count is "3"
-    Then I verify Author,Genre,ISBN,Publication Date,Price, Actions by Title:
+    Then verify default books catalog details and pagination controls
       | Title                | Author     | Genre                 | ISBN          | Publication Date | Price | Actions     |
       | The Very Busy Spider | Eric Carle | Picture Book          | 9780694005000 | 01/09/1984       | 6.99  | Edit,Delete |
       | The Cat in the Hat   | Dr. Seuss  | Children's Literature | 9780394800011 | 12/03/1957       | 7.99  | Edit,Delete |
       | Charlotte's Web      | E.B. White | Children's Fiction    | 9780064400558 | 15/10/1952       | 8.99  | Edit,Delete |
 
-
   @regression @ui @Add-Book
   Scenario: Verify all UI elements on Add Book Page
     When I tap on the "Start Testing" button
     And I should be in the "login" page
+    And I can see "Log In" button color "purple" and styling is correct
     When I login with username "admin" and password "admin"
     And I should be in the "Book List" page
     When I click on the "Add Book" button

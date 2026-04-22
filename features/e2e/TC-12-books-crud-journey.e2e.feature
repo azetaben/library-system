@@ -47,7 +47,7 @@ Feature: Books inventory admin CRUD journey
     When I login with username "admin" and password "admin"
     And I should see "Books Inventory App" as the page title
     Then the "books" page url, title, and heading should be correct
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I can see book catelog management related controls:
       | control              |
       | Log Out              |
@@ -67,13 +67,13 @@ Feature: Books inventory admin CRUD journey
     And the "Previous" button should be disabled on the first page
     And the "Previous" and "Next" pagination buttons should be disabled on the first page
     And the "Next" button should be disabled on the first page
-    And I can see "Total Book Titles:" 3 in the book catalog page
+    And I can see "Total Book Titles:" 3 in the books list page
     And I verify the books catalog static content
     Then verify default books catalog details and pagination controls
-      | Title                | Author     | Genre                 | ISBN          | Publication Date | Price | Actions     |
-      | The Very Busy Spider | Eric Carle | Picture Book          | 9780694005000 | 01/09/1984       | 6.99  | Edit,Delete |
-      | The Cat in the Hat   | Dr. Seuss  | Children's Literature | 9780394800011 | 12/03/1957       | 7.99  | Edit,Delete |
-      | Charlotte's Web      | E.B. White | Children's Fiction    | 9780064400558 | 15/10/1952       | 8.99  | Edit,Delete |
+      | Title                | Author     | Genre                 | ISBN          | Publication Date | Price| Actions     |
+      | The Very Busy Spider | Eric Carle | Picture Book          | 9780694005000 | 01/09/1984       | 6.99 | Edit,Delete |
+      | The Cat in the Hat   | Dr. Seuss  | Children's Literature | 9780394800011 | 12/03/1957       | 7.99 | Edit,Delete |
+      | Charlotte's Web      | E.B. White | Children's Fiction    | 9780064400558 | 15/10/1952       | 8.99 | Edit,Delete |
     And I verify the clickable controls on the books catalog page
     And all same-origin links on the page should not be broken
     When I click on the "Add Book" button
@@ -132,4 +132,4 @@ Feature: Books inventory admin CRUD journey
     But the "Logout" button should not be visible on the "Book List" page
     Then I should be redirected to the "Book List" page
     And I should see the "Book List" page with the correct heading
-    And I can see "Total Book Titles:" 3 in the book catalog page
+    And I can see "Total Book Titles:" 3 in the books list page
