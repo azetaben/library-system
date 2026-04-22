@@ -1,0 +1,98 @@
+export const appData = {
+    labels: {
+        username: 'Username',
+        password: 'Password',
+    },
+    titles: {
+        app: 'Books Inventory App',
+        login: 'Login - Books Inventory App',
+    },
+    headings: {
+        landing: 'Welcome to Books Inventory',
+        login: 'Login',
+        booksCatalog: 'Book List',
+        addBook: 'Add a New Book',
+        editBook: 'Edit Book',
+        introduction: 'Introduction',
+        businessRequirement: 'Business Requirement',
+        task: 'Task',
+        importantGuidelines: 'Important Guidelines',
+    },
+    buttons: {
+        startTesting: 'Start Testing',
+        show: 'Show',
+        hide: 'Hide',
+        login: 'Log In',
+        loginAlt: 'Login',
+        logout: 'Log Out',
+        addBook: 'Add Book',
+        previous: 'Previous',
+        next: 'Next',
+        edit: 'Edit',
+        delete: 'Delete',
+        cancel: 'Cancel',
+        saveChanges: 'Save Changes',
+    },
+    auth: {
+        welcomeUser: 'Welcome, Admin!',
+    },
+    validation: {
+        addBookFormLabel: 'Add a New Book',
+        requiredMessages: {
+            title: 'Title is required.',
+            author: 'Author is required.',
+            genre: 'Genre is required.',
+            isbn: 'ISBN is required.',
+            publicationDate: 'Publication Date is required.',
+            price: 'Price is required.',
+        },
+    },
+    catalog: {
+        summaryLabel: 'Total Book Titles:',
+        supportedGenres: [
+            'Fiction',
+            'Non-Fiction',
+            'Mystery',
+            'Fantasy',
+            'Science Fiction',
+            'Biography',
+        ],
+        seededBooks: [
+            {
+                title: 'The Very Busy Spider',
+                author: 'Eric Carle',
+                genre: "Children's Literature",
+                isbn: '9780694005000',
+                publicationDate: '01/09/1984',
+                price: '6.99',
+            },
+            {
+                title: 'The Cat in the Hat',
+                author: 'Dr. Seuss',
+                genre: "Children's Literature",
+                isbn: '9780394800011',
+                publicationDate: '12/03/1957',
+                price: '7.99',
+            },
+            {
+                title: "Charlotte's Web",
+                author: 'E.B. White',
+                genre: "Children's Literature",
+                isbn: '9780064400558',
+                publicationDate: '15/10/1952',
+                price: '8.99',
+            },
+        ],
+    },
+} as const;
+
+export const appPatterns = {
+    startTestingButton: /^start testing$/i,
+    showButton: /^show$/i,
+    hideButton: /^hide$/i,
+    loginHeading: /login/i,
+    editBookHeading: /edit book/i,
+    logoutButton: /log\s*out/i,
+    welcomeUser: /welcome,\s*admin!?/i,
+    pageOneSummary: /Page 1 of 1|Page 1 of \d+/i,
+} as const;

@@ -10,7 +10,7 @@ Feature: Login functionality with cookie bypass
 
   @regression @session @catalog @Critical
   Scenario: restore a session directly to the books catalog
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I should see the "Book List" page with the correct heading
 
   @regression @session @catalog @Critical

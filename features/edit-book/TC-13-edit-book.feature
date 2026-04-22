@@ -19,12 +19,11 @@ Feature: Edit book details
       | Next                 |
       | Page 1 of 1          |
       | Total Book Titles: 3 |
-    Then I should see default displayed books catalog details:
-      | Title                | Author     | Genre                 | ISBN          | Publication Date | Price | Actions     |
-      | The Very Busy Spider | Eric Carle | Picture Book          | 9780694005000 | 01/09/1984       | 6.99  | Edit,Delete |
-      | The Cat in the Hat   | Dr. Seuss  | Children's Literature | 9780394800011 | 12/03/1957       | 7.99  | Edit,Delete |
-      | Charlotte's Web      | E.B. White | Children's Fiction    | 9780064400558 | 15/10/1952       | 8.99  | Edit,Delete |
-    #And I click on the "Edit" button for a book in the catalog
+     Then I should see default displayed books catalog details:
+       | Title                | Author     | Genre               | ISBN          | Publication Date | Price | Actions     |
+       | The Very Busy Spider | Eric Carle | Children's Literature | 9780694005000 | 01/09/1984       | 6.99  | Edit,Delete |
+       | The Cat in the Hat   | Dr. Seuss  | Children's Literature | 9780394800011 | 12/03/1957       | 7.99  | Edit,Delete |
+       | Charlotte's Web      | E.B. White | Children's Literature | 9780064400558 | 15/10/1952       | 8.99  | Edit,Delete |
     And I click on the "Edit" button for the book "The Very Busy Spider"
     Given I am in the "Edit book details" page
     And the "Edit Book" page url, title, and heading should be correct
@@ -40,13 +39,13 @@ Feature: Edit book details
       | Publication Date |
       | Price            |
     When I fill and submit the edit book form:
-      | Title           | Author       | Genre        | ISBN | Publication Date | Price |
-      | The Busy Spider | Ben Carle Be | Picture Book | 1    | 2000-09-01       | 16.99 |
-    Then I verify the updated values in edit book form:
-      | Title              | Author       | Genre                 | ISBN          | Publication Date | Price |
-      | The Cat in the Hat | Dr. Seuss    | Children's Literature | 9780394800011 | 12/03/1957       | 7.99  |
-      | Charlotte's Web    | E.B. White   | Children's Fiction    | 9780064400558 | 15/10/1952       | 8.99  |
-      | The Busy Spider    | Ben Carle Be | Picture Book          | 1             | 2000-09-01       | 16.99 |
+      | Title           | Author       | Genre   | ISBN | Publication Date | Price |
+      | The Busy Spider | Ben Carle Be | Fiction | 1    | 2000-09-01       | 16.99 |
+     Then I verify the updated values in edit book form:
+       | Title              | Author       | Genre               | ISBN          | Publication Date | Price |
+       | The Cat in the Hat | Dr. Seuss    | Children's Literature | 9780394800011 | 12/03/1957       | 7.99  |
+       | Charlotte's Web    | E.B. White   | Children's Literature | 9780064400558 | 15/10/1952       | 8.99  |
+       | The Busy Spider    | Ben Carle Be | Fiction              | 1             | 2000-09-01       | 16.99 |
 
   Scenario Outline: verify Edit book details form validation with invalid inputs
     When I fill and submit the edit book form:

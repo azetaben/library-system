@@ -4,6 +4,13 @@ export default function () {
         Number.parseInt(process.env.CUCUMBER_REGRESSION_PARALLEL ?? '2', 10) || 2,
     );
 
+    const runTimestamp = new Date().toISOString().replace(/[.:]/g, '-');
+    const browserLabel = (process.env.BROWSER ?? 'unknown-browser')
+        .trim()
+        .replace(/[^a-zA-Z0-9_-]+/g, '_');
+    const jsonReportPath = `e2e-tests/reports/cucumber-json/cucumber-report-${browserLabel}-${runTimestamp}.json`;
+    const htmlReportPath = `e2e-tests/reports/cucumber-html/cucumber-report-${browserLabel}.html`;
+
     const sharedConfig = {
         import: [
             'e2e-tests/config/**/*.ts',
@@ -14,13 +21,10 @@ export default function () {
         format: [
             'progress',
             'summary',
-            'html:e2e-tests/reports/cucumber-html/cucumber-report.html',
-            'json:e2e-tests/reports/cucumber-json/cucumber-report.json',
+            `html:${htmlReportPath}`,
+            `json:${jsonReportPath}`,
             'allure-cucumberjs/reporter',
         ],
-        formatOptions: {
-            snippetInterface: 'async-await',
-        },
         tags: 'not @bug',
         publishQuiet: true,
         failFast: false,
@@ -36,8 +40,8 @@ export default function () {
             format: [
                 'progress',
                 'summary',
-                'html:e2e-tests/reports/cucumber-html/cucumber-report.html',
-                'json:e2e-tests/reports/cucumber-json/cucumber-report.json',
+                `html:${htmlReportPath}`,
+                `json:${jsonReportPath}`,
                 'allure-cucumberjs/reporter',
                 'rerun:e2e-tests/reports/diagnostics/rerun.txt',
             ],
@@ -51,6 +55,26 @@ export default function () {
             ...sharedConfig,
             tags: '@regression and not @bug',
             parallel: regressionParallel,
+        },
+        bug: {
+            ...sharedConfig,
+            tags: '@bug',
+        },
+        security: {
+            ...sharedConfig,
+            tags: '@security and not @bug',
+        },
+        performance: {
+            ...sharedConfig,
+            tags: '@performance and not @bug',
+        },
+        workflow: {
+            ...sharedConfig,
+            tags: '@workflow and not @bug',
+        },
+        uiContract: {
+            ...sharedConfig,
+            tags: '@ui-contract and not @bug',
         },
         debug: {
             ...sharedConfig,

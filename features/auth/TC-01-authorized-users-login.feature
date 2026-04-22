@@ -20,4 +20,4 @@ Feature: Admin system authorised user login authentication
     When I login with username "admin" and password "admin"
     Then I should be authenticated as "Welcome, Admin!"
     And the "books list" page url, title, and heading should be correct
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"

@@ -18,7 +18,7 @@ Feature: Edit book page strict validation and logout retention checks
     And the page URL should be "/books"
     And the page title should exactly be "Books Inventory App"
     And the primary page header should exactly be "Book List"
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     When I click the "Edit" action for book "The Very Busy Spider"
     Then the "Edit Book" page url, title, and heading should be correct
     And the page URL should include path "/edit-book"

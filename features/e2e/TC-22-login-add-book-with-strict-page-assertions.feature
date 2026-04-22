@@ -39,7 +39,7 @@ Feature: Books inventory login-to-add-book flow with UI contract checks
     And the page URL should be "/books"
     And the page title should exactly be "Books Inventory App"
     And the primary page header should exactly be "Book List"
-    And I should be redirected to the books catalog page and I can see "Welcome, Admin!"
+    And I should be redirected to the books list page and I can see "Welcome, Admin!"
     And I should see "Log Out" button on the top right page
     And I click on the "Add Book" button
     Then the "add a new book" page url, title, and heading should be correct
